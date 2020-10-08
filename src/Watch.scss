@@ -1,0 +1,243 @@
+/*!
+ * Watch 1.1.1
+ * https://github.com/heyheychicken/Watch
+ * @license MIT licensed
+ *
+ * Copyright (C) 2019 Duval Antoine (HeyHeyChicken)
+ */
+
+@import "../submodules/SCSS-Mixins/src/SCSS-Mixins";
+
+$color_1: #FFCB59;
+$color_2: #8A47D8;
+
+#watch{
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  @include transform(scale(0.5) translatey(-50%));
+
+  > #screen{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+    height: 448px;
+    width: 368px;
+    background-color: black;
+    @include border-radius(40px);
+    overflow: hidden;
+    font-family: "Roboto", sans-serif;
+
+    > .quarter{
+      float: left;
+      height: 50%;
+      width: 50%;
+      position: relative;
+      overflow: hidden;
+      font-size: 200px;
+      line-height: 170px;
+
+      > .before, > .after{
+        position: absolute;
+        height: 200%;
+        width: 200%;
+
+        > .hours, > .minutes{
+          position: absolute;
+        }
+      }
+
+      > .before{
+        background-color: $color_1;
+        color: $color_2;
+        z-index: 1;
+      }
+
+      > .after{
+        background-color: $color_2;
+        color: $color_1;
+        z-index: 2;
+        overflow: hidden;
+      }
+
+      &:nth-child(1){
+        > .before, > .after{
+          bottom: 0px;
+          right: 0px;
+        }
+
+        > .after{
+          @include transform-origin(bottom, right);
+
+          > .hours{
+            @include transform-origin(bottom, right);
+          }
+        }
+
+        .hours{
+          bottom: 0px;
+          right: 0px;
+        }
+      }
+
+      &:nth-child(2){
+        > .before, > .after{
+          bottom: 0px;
+          left: 0px;
+        }
+
+        > .after{
+          @include transform-origin(bottom, left);
+
+          > .hours{
+            @include transform-origin(bottom, left);
+          }
+        }
+
+        .hours{
+          bottom: 0px;
+          left: 0px;
+        }
+      }
+
+      &:nth-child(3){
+        > .before, > .after{
+          top: 0px;
+          right: 0px;
+        }
+
+        > .after{
+          @include transform-origin(top, right);
+
+          > .minutes{
+            @include transform-origin(top, right);
+          }
+        }
+
+        .minutes{
+          top: 0px;
+          right: 0px;
+        }
+      }
+
+      &:nth-child(4){
+        > .before, > .after{
+          top: 0px;
+          left: 0px;
+        }
+
+        > .after{
+          @include transform-origin(top, left);
+
+          > .minutes{
+            @include transform-origin(top, left);
+          }
+        }
+
+        .minutes{
+          top: 0px;
+          left: 0px;
+        }
+      }
+    }
+
+    @for $i from 0 through 15 {
+      &[seconds="#{$i}"]{
+        > .quarter{
+          &:nth-child(2){
+            > .after{
+              @include transform(rotate(calc(#{$i} * 360 / 60 * 1deg)));
+
+              > .hours{
+                @include transform(rotate(calc(#{$i} * 360 / 60 * 1deg * -1)));
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @for $i from 16 through 30 {
+      &[seconds="#{$i}"]{
+        > .quarter{
+          &:nth-child(2){
+            > .after{
+              @include transform(rotate(90deg));
+            }
+          }
+
+          &:nth-child(4){
+            > .after{
+              @include transform(rotate(calc(((#{$i} + 15) * 360 / 60 * 1deg) + 180deg)));
+
+              > .minutes{
+                @include transform(rotate(calc(((#{$i} + 15) * 360 / 60 * 1deg * -1) + 180deg)));
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @for $i from 31 through 45 {
+      &[seconds="#{$i}"]{
+        > .quarter{
+          &:nth-child(2), &:nth-child(4){
+            > .after{
+              @include transform(rotate(90deg));
+            }
+          }
+
+          &:nth-child(3){
+            > .after{
+              @include transform(rotate(calc(((#{$i} + 15) * 360 / 60 * 1deg) + 90deg)));
+
+              > .minutes{
+                @include transform(rotate(calc((((#{$i} + 15) * 360 / 60 * 1deg) + 90deg) * -1)));
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @for $i from 46 through 59 {
+      &[seconds="#{$i}"]{
+        > .quarter{
+          &:nth-child(2), &:nth-child(4), &:nth-child(3){
+            > .after{
+              @include transform(rotate(90deg));
+            }
+          }
+
+          &:nth-child(1){
+            > .after{
+              @include transform(rotate(calc(((#{$i} + 15) * 360 / 60 * 1deg))));
+
+              > .hours{
+                @include transform(rotate(calc(((#{$i} + 15) * 360 / 60 * 1deg * -1))));
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.reverse{
+      > .quarter{
+        > .before{
+          background-color: $color_2;
+          color: $color_1;
+        }
+
+        > .after{
+          background-color: $color_1;
+          color: $color_2;
+        }
+      }
+    }
+  }
+}
