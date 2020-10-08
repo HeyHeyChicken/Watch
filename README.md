@@ -5,7 +5,7 @@
 
 **Watch** is a small challenge (inspired from [Dribbble](//dribbble.com/shots/14213491-watch)) that I wanted to take up.<br/>
 The animation is only done in CSS. The JS is only used to set the watch to the current time.<br/>
-([live demo](//codepen.io/antoinecuffel/pen/YJqePv)).<br/>
+([live demo](//codepen.io/antoinecuffel/pen/PozYdXb)).<br/>
 </div>
 <br/>
 
