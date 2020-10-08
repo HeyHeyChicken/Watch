@@ -1,6 +1,6 @@
 <div align="center">
  
-<img alt="logo" src="https://raw.githubusercontent.com/HeyHeyChicken/Watch/main/resources/github-logo.gif" width="200">
+<img alt="logo" src="https://raw.githubusercontent.com/HeyHeyChicken/Watch/main/resources/github-logo.gif" width="100">
 <br/>
 
 **Watch** is a small challenge (inspired from [Dribbble](//dribbble.com/shots/14213491-watch)) that I wanted to take up.<br/>
